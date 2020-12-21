@@ -1,0 +1,42 @@
+.normal {
+  font-family: Georgia, sans-serif;
+  margin-top: 4em;
+  text-align: center;
+}
+
+.welcome {
+  height: 512px;
+  background: url(../assets/yay.jpg) no-repeat center 0;
+  background-size: 512px 512px;
+}
+
+.list {
+  font-size: 1.2em;
+  margin: 1.8em 0 0;
+  list-style: none;
+  line-height: 1.5em;
+}
+
+.list code {
+  background: #f7f7f7;
+}
+.pages {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.container {
+  width: 200px;
+  height: 200px;
+  overflow: hidden;
+}
+.container_wrapper {
+  display: flex;
+  /* transform: translateX(-200px); */
+}
+.container_img {
+  flex: 0 0 200px;
+  width: 200px;
+  height: 200px;
+}
