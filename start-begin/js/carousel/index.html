@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <head>
+        <style type="text/css">
+        .carousel{
+            display: flex;
+            align-items: center;
+        }
+        .container {
+            width: 200px;
+            height: 200px;
+            overflow: hidden;
+         
+            
+        }
+       .container-wrapper {
+            display: flex;
+        }
+        img {
+            flex: 0 0 200px;
+            width: 200px;
+            height: 200px;
+        }
+        </style>
+    </head>
+</head>
+<body>
+    <div class="carousel">
+        <button class="left">左边</button>
+        <div class="container">
+        <div class="container-wrapper">
+            <img src="./image/index-active.png"></img>
+            <img src="./image/log-active.png"></img>
+            <img src="./image/me-active.png"></img>
+        </div>
+        </div>
+        <button class="right">右边</button>
+    </div>
+</body>
+
+
+</html>
+<script type="module" src="./carousel.js"></script>
