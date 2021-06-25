@@ -1,5 +1,89 @@
 import "./index.css";
+
 class Component {
+  constructor(options) {
+    if (!options.container) {
+      throw new Error("no container");
+    }
+    this.container = options.container;
+  }
+
+  setData(data) {
+    this.data = {
+      ...this.data,
+      ...data,
+    };
+    // 公开 API
+    this._render();
+    this.updated();
+  }
+
+  mount() {
+    this._render();
+    this.mounted();
+  }
+
+  mounted() {} // 子类覆盖
+
+  updated() {} // 子类覆盖
+
+  _render() {
+    // 内部方法
+    const html = this.render();
+    this.container.innerHTML = html;
+    this.removeEvent();
+    this.addEvent();
+  }
+
+  render() {
+    // 子类覆盖
+    return "";
+  }
+
+  addEvent() {} // 子类覆盖
+
+  removeEvent() {} // 子类覆盖
+}
+
+class Foo extends Component {
+  constructor(options) {
+    super(options);
+    this.data = {
+      counter: 0,
+    };
+    this.onClick = this.onClick.bind(this);
+  }
+
+  onClick() {
+    this.setData({ counter: this.data.counter + 1 });
+  };
+
+  addEvent() {
+    const btn = document.querySelector("#btn");
+    btn.addEventListener("click", this.onClick);
+  }
+
+  removeEvent() {
+    const btn = document.querySelector("#btn");
+    btn.removeEventListener("click", this.onClick);
+  }
+
+  render() {
+    return `
+      <div>
+        <div id="btn">Click Me</div>
+        <div>${this.data.counter}</div>
+      </div>
+      `;
+  }
+}
+
+const foo = new Foo({
+  container: document.querySelector("#root"),
+});
+foo.mount()
+
+class Banner {
   constructor(imgList) {
     this.imgList = imgList;
     this.current = 0;
@@ -23,7 +107,9 @@ class Component {
         <button class="left">左边</button>
         <div class="container">
             <div class="container-wrapper">
-            ${this.imgList.map((item) => `<div class=img>${item}</div>`).join("")}
+            ${this.imgList
+              .map((item) => `<div class=img>${item}</div>`)
+              .join("")}
             </div>
         </div>
         <button class="right">右边</button>
@@ -61,7 +147,5 @@ class Component {
     return -this.current * imgWidth;
   }
 }
-new Component([1, 2, 3]);
 
-
-export default Component;
+export default Banner;
